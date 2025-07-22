@@ -23,7 +23,7 @@
                 "id": "public.submenu",
                 "icon": "^https://www.emojiall.com/images/240/apple/1f600.png",
                 "exc": ["mainMenu"],
-                "submenu": [
+                "submenus": [
                     {
                         "name": "Public Submenu",
                         "id": "public.submenu",
