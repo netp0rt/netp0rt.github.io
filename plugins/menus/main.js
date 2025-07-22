@@ -680,7 +680,7 @@ ${missingFiles.join(', ')}
         parentItems.forEach(item => {
             const submenu = item.querySelector('.rtc-submenu-container');
             if (submenu) {
-                submenu.style.cssText = 'display:none;position:absolute;left:100%;top:0;min-width:150px;background:rgba(255,255,255,0.25);backdrop-filter: blur(10px);box-shadow:0 2px 10px rgba(0,0,0,0.1);z-index:1000;border-radius:4px;padding:5px 0';
+                submenu.style.cssText = 'display:none;position:absolute;left:100%;top:0;min-width:150px;background:rgba(255,255,255,0.75);backdrop-filter: blur(10px);box-shadow:0 2px 10px rgba(0,0,0,0.1);z-index:1000;border-radius:4px;padding:5px 0';
             }
             
             item.addEventListener('mouseenter', (e) => {
