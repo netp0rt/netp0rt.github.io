@@ -27,8 +27,8 @@
                     {
                         "name": "Public Submenu",
                         "id": "public.submenu",
-                        "icon": "^https://www.emojiall.com/images/240/apple/1f600.png",
-                        "action": "this.runScripts.debug()"
+                        "icon": "^https://www.emojiall.com/images/240/apple/1f699.png",
+                        "action": "this.tst.i(this.runScripts.debug())"
                     }
                 ]
             }
