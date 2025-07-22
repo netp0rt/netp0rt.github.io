@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  XML配置文件注意事项：
+  1. 特殊字符必须转义：
+     & → &amp;
+     < → &lt;
+     > → &gt;
+     " → &quot;
+     ' → &apos;
+  2. 注释不能包含"\-\-"或"-"开头/结尾的空格
+  3. 属性值必须用引号包围
+-->
+<menu-config>
+    <!-- 插件基本配置 -->
+    <opts>
+        <!-- 插件显示名称 -->
+        <name>菜单插件配置</name>
+        
+        <!-- 
+          版本信息
+          格式：阶段-版本号-类型
+          阶段：a=alpha, b=beta, r=release
+          类型：FF=Folder File, OF=Only Javascript File, MF=Min Javascript File
+        -->
+        <version>1.0.0-FF</version>
+        
+        <!-- 功能描述 -->
+        <description>菜单描述</description>
+        
+        <!-- 
+          说明文档路径（以当前路径为主，受rootOpt影响）
+          示例：./readme.md 表示当前目录下的readme.md文件
+        -->
+        <readme>./readme.md</readme>
+        
+        <!-- 
+          是否启用默认填充（true/false） 
+          示例：如果菜单配置中icon处于空时，empty.svg将自动插入
+        -->
+        <defaultSet>true</defaultSet>
+        
+        <!-- 
+          是否为开发模式（true/false）
+          用于标识当前环境，可控制调试信息输出等
+        -->
+        <isdev>false</isdev>
+        
+        <!-- 
+          路径基准（空值表示当前目录）
+          示例：如当前路径为/plugins/menus
+        -->
+        <rootOpt></rootOpt>
+    </opts>
+
+    <!-- 
+      样式表路径（支持CSS变量）
+      路径以rootOpt为基准
+      示例：menu.css 表示基于rootOpt路径下的menu.css文件
+    -->
+    <styles>menu.css</styles>
+
+    <!-- 菜单配置（支持多级嵌套） -->
+    <menus>
+        <!-- 公共菜单组（以#开头表示公共菜单） -->
+        <menu-group name="#public">
+            <menu-item>
+                <!-- 菜单显示文本 -->
+                <name>公共菜单测试1</name>
+                
+                <!-- 菜单ID，推荐格式：菜单组.功能名 -->
+                <id>public.test1</id>
+                
+                <!-- 
+                  图标路径（基于rootOpt）
+                  支持格式：
+                  1. 空值：表示无图标
+                  2. 特殊符号：&amp;（需转义）
+                  3. 相对路径：res/copy.svg
+                  4. 绝对路径：$/plugins/menu/res/txt.svg
+                  5. CSS变量：#icon-paste
+                  6. 第三方图标：@fa:fa-solid fa-folder-plus
+                  7. 外部URL：^https://example.com/icon.png
+                -->
+                <icon></icon>
+                
+                <!-- 执行的js函数 -->
+                <action></action>
+                
+                <!-- 排除的菜单组（仅限#public菜单） -->
+                <exc>
+                    <item>mainMenu</item>
+                </exc>
+            </menu-item>
+            <menu-item>
+                <name>公共菜单测试2</name>
+                <id>public.test2</id>
+                <icon>&amp;</icon>
+                <action></action>
+                <exc>
+                    <item>mainMenu</item>
+                </exc>
+            </menu-item>
+            <menu-item>
+                <name>更多</name>
+                <id>public.more</id>
+                <icon>&amp;</icon>
+                <!-- 子菜单配置 -->
+                <submenus>
+                    <menu-item>
+                        <name>显示toast.success</name>
+                        <id>more.s_tst_s</id>
+                        <icon>@fa:fa-solid fa-folder-plus</icon>
+                        <action>this.tst.s('toast success')</action>
+                    </menu-item>
+                </submenus>
+            </menu-item>
+        </menu-group>
+
+        <!-- 主菜单组 -->
+        <menu-group name="mainMenu">
+            <menu-item>
+                <name>复制（测试）</name>
+                <id>main.copy</id>
+                <icon>res/copy.svg</icon>
+                <action>copy</action>
+            </menu-item>
+            <menu-item>
+                <name>粘贴（测试）</name>
+                <id>main.paste</id>
+                <icon>#icon-paste</icon>
+                <action>paste</action>
+            </menu-item>
+            <menu-item>
+                <name>剪切（测试）</name>
+                <id>main.cut</id>
+                <icon>@fa:fa-solid fa-cut</icon>
+                <action></action>
+            </menu-item>
+            <menu-item>
+                <name>更多</name>
+                <id>main.more</id>
+                <icon>&amp;</icon>
+                <submenus>
+                    <menu-item>
+                        <name>创建文件夹</name>
+                        <id>more.create_folder</id>
+                        <icon>@fa:fa-solid fa-folder-plus</icon>
+                        <action>create_folder</action>
+                    </menu-item>
+                    <menu-item>
+                        <name>创建txt文件</name>
+                        <id>main.more.create_txt</id>
+                        <icon>$/plugins/menuv1/res/txt.svg</icon>
+                        <action>create_txtfile</action>
+                    </menu-item>
+                    <menu-item>
+                        <name>创建lnk文件</name>
+                        <id>main.more.create_lnk</id>
+                        <icon>#--icon-paste</icon>
+                        <action>create_lnkfile</action>
+                    </menu-item>
+                </submenus>
+            </menu-item>
+        </menu-group>
+
+        <!-- 二级菜单组（预留） -->
+        <menu-group name="secondaryMenu"></menu-group>
+
+        <!-- 上下文菜单组（预留） -->
+        <menu-group name="contextMenu"></menu-group>
+    </menus>
+
+    <!-- 
+      触发器配置
+      格式：<item selector="CSS选择器">菜单组名</item>
+    -->
+    <trigger>
+        <item selector=".main-content">mainMenu</item>
+        <item selector=".chat-history">mainMenu</item>
+        <item selector=".chat-container">mainMenu</item>
+    </trigger>
+</menu-config>
