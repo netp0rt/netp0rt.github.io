@@ -17,6 +17,20 @@
                 "icon": "@fa:fa-solid fa-1",
                 "action": "this.tst.s('Example 1 toast test')",
                 "exc": ["mainMenu"]
+            },
+            {
+                "name": "Public Submenu",
+                "id": "public.submenu",
+                "icon": "^https://www.emojiall.com/images/240/apple/1f600.png",
+                "exc": ["mainMenu"],
+                "submenu": [
+                    {
+                        "name": "Public Submenu",
+                        "id": "public.submenu",
+                        "icon": "^https://www.emojiall.com/images/240/apple/1f600.png",
+                        "action": "this.runScripts.debug()"
+                    }
+                ]
             }
         ],
         "mainMenu": [
