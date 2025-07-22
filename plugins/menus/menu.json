@@ -14,7 +14,7 @@
             {
                 "name": "Public Example 1",
                 "id": "public.example",
-                "icon": "#--icon-paste",
+                "icon": "@fa:fa-solid fa-folder-paste",
                 "action": "this.tst.s('Example 1 toast test')",
                 "exc": ["mainMenu"]
             }
