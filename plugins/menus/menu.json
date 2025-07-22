@@ -38,7 +38,7 @@
                 "name": "mainMenu Example 1",
                 "id": "main.example",
                 "icon": "@fa:fa-solid fa-1",
-                "action": "this.tst.s('Example 1 toast test')"
+                "action": "this.tst.s('mainMenu 1 toast test')"
             }
         ]
     },
