@@ -276,7 +276,7 @@ class RTCMenu {
     constructor() {
 
         // 基础配置
-        this.runpath = '/plugins/RTCMenusDist/';
+        this.runpath = '/plugins/menus/';
         this.runconf = 'menu.json';
 
         // 菜单配置（自动读取并配置）
