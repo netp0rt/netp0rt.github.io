@@ -17,20 +17,6 @@
                 "icon": "@fa:fa-solid fa-1",
                 "action": "this.tst.s('Example 1 toast test')",
                 "exc": ["mainMenu"]
-            },
-            {
-                "name": "Public Submenu",
-                "id": "public.submenu",
-                "icon": "^https://www.emojiall.com/images/240/apple/1f600.png",
-                "exc": ["mainMenu"],
-                "submenus": [
-                    {
-                        "name": "Public Submenu",
-                        "id": "public.submenu",
-                        "icon": "^https://www.emojiall.com/images/240/apple/1f699.png",
-                        "action": "this.tst.i(this.runScripts.debug())"
-                    }
-                ]
             }
         ],
         "mainMenu": [
@@ -38,7 +24,7 @@
                 "name": "mainMenu Example 1",
                 "id": "main.example",
                 "icon": "@fa:fa-solid fa-1",
-                "action": "this.tst.s('mainMenu 1 toast test')"
+                "action": "this.tst.s('Example 1 toast test')"
             }
         ]
     },

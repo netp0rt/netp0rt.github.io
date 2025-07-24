@@ -35,7 +35,12 @@ class Tools {
             info: (m,c,d) => this.show(m,'info',c,d),
             
             // 原始方法
-            _: this.show.bind(this)
+            _: this.show.bind(this),
+
+            name: 'showToast',
+            version: 'rc-1.0.0',
+            author: 'netport',
+            ghlink: 'https://github.com/netp0rt（暂未上传）'
         };
     }
 
@@ -269,8 +274,9 @@ class Tools {
 /* ====================== 主菜单类 ====================== */
 class RTCMenu {
     constructor() {
+
         // 基础配置
-        this.runpath = '/plugins/menus/';
+        this.runpath = '/plugins/RTCMenusDist/';
         this.runconf = 'menu.json';
 
         // 菜单配置（自动读取并配置）
@@ -293,6 +299,7 @@ class RTCMenu {
             tools: this.tools,
             tst: this.tst,
             // 在这里绑定函数，例如 copy: this.copy.bind(this)
+            pluginInfo: this.pluginInfo.bind(this),
             debug: () => `可用方法:,${Object.keys(this.runScripts)}`
         });
 
@@ -353,26 +360,26 @@ class RTCMenu {
                 ? this.tools.convertXmlToJson(rawData) 
                 : JSON.parse(rawData);
 
-            let opts = {
-                name: data.opts?.name || 'Default Name',
+            // 保留原始 opts 的所有字段，并覆盖/添加特定字段
+            this.menus = data;
+            this.menus.opts = {
+                ...data.opts, // 保留原始所有字段
+                name: data.opts?.name || 'Default Name', // 覆盖特定字段（带默认值）
                 version: data.opts?.version || 'Default Version',
                 readme: data.opts?.readme || '',
                 description: data.opts?.description || 'Default Description',
-                defaultSet: data.opts?.defaultSet,
                 isdev: Boolean(data.opts?.isdev),
             };
 
             const resolvedPath = this.tools.resolvePath(this.runpath, data.opts?.rootOpt || '');
             this.tst.i(`解析路径: ${data.opts?.rootOpt} -> ${resolvedPath}`, 'PATH_RESOLVED');
-            opts.rootOpt = resolvedPath.endsWith('/') ? resolvedPath : resolvedPath + '/';
-            this.defaultSetting = opts.defaultSet;
-            this.menus = data;
-            this.menus.opts = opts;
-            this.isdev = Boolean(opts.isdev);
+            this.menus.opts.rootOpt = resolvedPath.endsWith('/') ? resolvedPath : resolvedPath + '/';
+            this.defaultSetting = this.menus.opts.defaultSet;
+            this.isdev = Boolean(this.menus.opts.isdev);
             this.trigger = data.trigger || {};
-            this.loadStyles(opts.rootOpt + data.styles);
+            this.loadStyles(this.menus.opts.rootOpt + data.styles);
 
-            this.checkRequiredFiles(opts.rootOpt);
+            this.checkRequiredFiles(this.menus.opts.rootOpt);
             this.renderMenu();
             this.setupContextMenu();
         } catch (error) {
@@ -680,7 +687,7 @@ ${missingFiles.join(', ')}
         parentItems.forEach(item => {
             const submenu = item.querySelector('.rtc-submenu-container');
             if (submenu) {
-                submenu.style.cssText = 'display:none;position:absolute;left:100%;top:0;min-width:150px;background:rgba(255,255,255,0.75);backdrop-filter: blur(10px);box-shadow:0 2px 10px rgba(0,0,0,0.1);z-index:1000;border-radius:4px;padding:5px 0';
+                submenu.style.cssText = 'display:none;position:absolute;left:100%;top:0;min-width:150px;background:rgba(255,255,255,0.25);backdrop-filter: blur(10px);box-shadow:0 2px 10px rgba(0,0,0,0.1);z-index:1000;border-radius:4px;padding:5px 0';
             }
             
             item.addEventListener('mouseenter', (e) => {
@@ -727,10 +734,52 @@ ${missingFiles.join(', ')}
     }
 
     /* ---------- 菜单动作 ---------- */
+    async pluginInfo() {
+        this.tst.i('插件信息详情请见Developer Console')
+        console.group('插件信息');
+        console.log('%c附带插件信息:', 'font-weight: bold; color: #3498db; font-size: 14px');
+        console.table({
+        '插件版本': {
+            'showToast插件': this.tst?.version || 'N/A',
+            'parseXmlToJson': 'None Version',
+            'featuredetector': window._ftMeta?.version || 'N/A'
+        },
+        '插件作者': {
+            'showToast插件': this.tst?.author || 'N/A',
+            'parseXmlToJson': 'netport',
+            'featuredetector': window._ftMeta?.author || 'N/A'
+        },
+        '插件地址': {
+            'showToast插件': this.tst?.ghlink || 'N/A',
+            'parseXmlToJson': 'none link',
+            'featuredetector': window._ftMeta?.ghlink || 'N/A'
+        }
+        }, ['showToast插件', 'parseXmlToJson', 'featuredetector']);
+
+        console.log('%c提示: 可通过 window._ftMeta 或 this.tst 访问插件元数据', 
+        'color: #7f8c8d; font-style: italic;');
+        console.group('RTCMenu信息:');
+        console.log('插件名字:', this.menus.opts.name);
+        console.log('插件作者:', this.menus.opts.author);
+        console.log('插件版本:', this.menus.opts.version);
+        console.log('插件描述:', this.menus.opts.description);
+        console.log('插件运行路径:', this.runpath);
+        console.log('插件链接:', this.menus.opts.ghlink);
+        console.groupEnd();
+        console.groupEnd();
+        return {runstat: true}
+    }
 }
 
 /* ====================== 初始化 ====================== */
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => setup());
+window.addEventListener('load', () => setup());
+
+function setup() {
+    if (window._RTCMenuRunned === true) {
+        return;
+    }
+    window._RTCMenuRunned = true;
     console.group('Compatibility Check');
     const compatResult = ft.test({ mode: 'j', impact: true, minver: 8 });
     console.log('Max Supported Version:', compatResult.maxVer);
@@ -746,4 +795,4 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     new RTCMenu();
-});
+}

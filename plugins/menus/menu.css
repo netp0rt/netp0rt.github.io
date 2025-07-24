@@ -16,6 +16,7 @@
  * 4. 视觉效果
  * 5. 图标系统
  * 6. 子菜单配置
+ * 7. 层级系统（z-index）
  */
 
 :root {
@@ -68,6 +69,13 @@
      * -------------------------- */
     --rtc-submenu-offset: -6px; /* 子菜单垂直偏移 */
     --rtc-submenu-shadow: 3px 6px 20px rgba(0, 0, 0, 0.15); /* 子菜单阴影 */
+    
+    /* --------------------------
+     * 7. 层级系统变量（z-index）
+     * -------------------------- */
+    --rtc-base-z-index: 1000; /* 基础层级，用于主菜单 */
+    --rtc-submenu-z-index: calc(var(--rtc-base-z-index) + 10); /* 子菜单层级（主菜单+10） */
+    --rtc-toast-z-index: calc(var(--rtc-base-z-index) + 20); /* 提示框层级（主菜单+20） */
 }
 
 /* =============================================
@@ -104,6 +112,7 @@
     transform: translateY(-5px);
     animation: menuFadeIn 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
     border: 1px solid var(--rtc-border-color);
+    z-index: var(--rtc-base-z-index); /* 使用基础层级 */
 }
 
 @keyframes menuFadeIn {
@@ -241,7 +250,7 @@
     left: 100%;
     top: var(--rtc-submenu-offset);
     min-width: 160px;
-    z-index: 100;
+    z-index: var(--rtc-submenu-z-index); /* 使用子菜单层级 */
     font-family: var(--rtc-font-family);
     font-size: var(--rtc-font-size);
     color: var(--rtc-text-color);
@@ -306,9 +315,9 @@
 /* =============================================
  * Toast字体
  * ============================================= */
-
 .toast, 
 .toast-message, 
 .toast-code {
   font-family: var(--rtc-font-family);
+  z-index: var(--rtc-toast-z-index); /* 使用提示框层级 */
 }

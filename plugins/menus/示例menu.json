@@ -1,0 +1,108 @@
+{
+    "opts": {
+        "name": "菜单插件配置",
+        "version": "1.0.0-FF",
+        "description": "菜单描述",
+        "readme": "./readme.md",
+        "defaultSet": false,
+        "isdev": false,
+        "rootOpt": ""
+    },
+    "styles": "menu.css",
+    "menus": {
+        "#public": [
+            {
+                "name": "公共菜单测试1",
+                "id": "public.test1",
+                "icon": "#--icon-paste",
+                "action": "",
+                "exc": ["mainMenu"]
+            },
+            {
+                "name": "更多",
+                "id": "public.more",
+                "icon": "&",
+                "submenus": [
+                    {
+                        "name": "显示toast.success",
+                        "id": "more.s_tst_s",
+                        "icon": "@fa:fa-solid fa-folder-plus",
+                        "action": "this.tst.s('toast success')"
+                    }
+                ]
+            },
+            {
+                "name": "公共菜单测试2",
+                "id": "public.test2",
+                "icon": "&",
+                "action": "",
+                "exc": ["mainMenu"]
+            },
+            {
+                "name": "更多",
+                "id": "public.more",
+                "icon": "&",
+                "submenus": [
+                    {
+                        "name": "显示toast.success",
+                        "id": "more.s_tst_s",
+                        "icon": "@fa:fa-solid fa-folder-plus",
+                        "action": "this.tst.s('toast success')"
+                    }
+                ]
+            }
+        ],
+        "mainMenu": [
+            {
+                "name": "复制（测试）",
+                "id": "main.copy",
+                "icon": "@fa:fa-solid fa-copy",
+                "action": "this.copy(this.selectT)"
+            },
+            {
+                "name": "粘贴（测试）",
+                "id": "main.paste",
+                "icon": "@fa:fa-solid fa-paste",
+                "action": "this.paste()"
+            },
+            {
+                "name": "剪切（测试）",
+                "id": "main.cut",
+                "icon": "@fa:fa-solid fa-cut",
+                "action": ""
+            },
+            {
+                "name": "更多",
+                "id": "main.more",
+                "icon": "&",
+                "submenus": [
+                    {
+                        "name": "创建文件夹",
+                        "id": "more.create_folder",
+                        "icon": "@fa:fa-solid fa-folder-plus",
+                        "action": "create_folder"
+                    },
+                    {
+                        "name": "创建txt文件",
+                        "id": "main.more.create_txt",
+                        "icon": "@fa:fa-solid fa-file-lines",
+                        "action": "create_txtfile"
+                    },
+                    {
+                        "name": "创建lnk文件",
+                        "id": "main.more.create_lnk",
+                        "icon": "@fa:fa-solid fa-link",
+                        "action": "create_lnkfile"
+                    }
+                ]
+            }
+        ],
+        "secondaryMenu": [],
+        "contextMenu": []
+    },
+    "trigger": {
+        ".main-content": "mainMenu",
+        ".chat-history": "mainMenu",
+        ".chat-container": "mainMenu"
+    }
+}

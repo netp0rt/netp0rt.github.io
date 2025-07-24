@@ -1,5 +1,14 @@
 // ft.js
 (function(window) {
+  // 简介
+  window._ftMeta = {
+    name: 'featuredetector',
+    author: 'netport',
+    version: 'rc-1.0.0',
+    ghlink: 'https://github.com/netp0rt（暂未上传）',
+    des: '浏览器ES5+/CSS兼容性检测插件',
+    loadedAt: new Date().toISOString()
+  };
   // ECMAScript版本映射表
   var esVersionMap = {
     'ES5': 5,
