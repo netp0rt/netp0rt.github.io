@@ -1,12 +1,14 @@
 {
     "opts": {
         "name": "RTCMenu",
-        "version": "1.0.0-FF",
+        "author": "netport",
+        "version": "r-1.0.0-FF",
         "description": "RighT Click Menu Plugin",
         "readme": "readme.md",
         "defaultSet": false,
         "isdev": false,
-        "rootOpt": ""
+        "rootOpt": "",
+        "ghlink": "https://github.com/netp0rt（暂未上传）"
     },
     "styles": "menu.css",
     "menus": {
@@ -17,6 +19,14 @@
                 "icon": "@fa:fa-solid fa-1",
                 "action": "this.tst.s('Example 1 toast test')",
                 "exc": ["mainMenu"]
+            },
+            {
+                "name": "Info",
+                "id": "public.plugininfo",
+                "icon": "@fa:fa-solid fa-info",
+                "action": "this.runScripts.pluginInfo()",
+                "exc": ["mainMenu"]
+
             }
         ],
         "mainMenu": [
