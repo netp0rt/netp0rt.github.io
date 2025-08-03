@@ -5,7 +5,7 @@
         "version": "r-1.0.0-FF",
         "description": "RighT Click Menu Plugin",
         "readme": "readme.md",
-        "defaultSet": false,
+        "defaultSet": true,
         "isdev": false,
         "rootOpt": "",
         "ghlink": "https://github.com/netp0rt（暂未上传）"
@@ -16,7 +16,7 @@
             {
                 "name": "Public Example 1",
                 "id": "public.example",
-                "icon": "@fa:fa-solid fa-1",
+                "icon": "@fa:fa-solid fa-image",
                 "action": "this.tst.s('Example 1 toast test')",
                 "exc": ["mainMenu"]
             },
@@ -24,7 +24,7 @@
                 "name": "Info",
                 "id": "public.plugininfo",
                 "icon": "@fa:fa-solid fa-info",
-                "action": "this.runScripts.pluginInfo()",
+                "action": "this.pluginInfo()",
                 "exc": ["mainMenu"]
 
             }
@@ -34,11 +34,68 @@
                 "name": "mainMenu Example 1",
                 "id": "main.example",
                 "icon": "@fa:fa-solid fa-1",
-                "action": "this.tst.s('Example 1 toast test')"
+                "action": "this.tst.s('MainMenu 1 toast test')"
+            },
+            {
+                "name": "mainMenu Example 1",
+                "id": "main.example",
+                "icon": "@fa:fa-solid fa-1",
+                "submenus": [
+                    {
+                        "name": "submenu Example 1",
+                        "id": "main.submenu.example1",
+                        "icon": "@fa:fa-solid fa-1",
+                        "action": "this.tst.s('Submenu Example 1 toast test')"
+                    }
+                ]
+            }
+        ],
+        "secMenu": [
+            {
+                "name": "SecondMenu Example 1",
+                "id": "Sec.example",
+                "icon": "@fa:fa-solid fa-2",
+                "action": "this.test()"
+            },
+            {
+                "name": "SecMenu Example 1",
+                "id": "Sec.example",
+                "icon": "@fa:fa-solid fa-2",
+                "submenus": [
+                    {
+                        "name": "submenu Example 1",
+                        "id": "Sec.submenu.example1",
+                        "icon": "@fa:fa-solid fa-2",
+                        "action": "this.tst.s('Submenu Example 1 toast test')"
+                    }
+                ]
+            }
+        ],
+        "trdMenu": [
+            {
+                "name": "TrdMenu Example 1",
+                "id": "Trd.example",
+                "icon": "@fa:fa-solid fa-3",
+                "action": "this.tst.s('TrdMenu 1 toast test')"
+            },
+            {
+                "name": "TrdMenu Example 1",
+                "id": "Trd.example",
+                "icon": "@fa:fa-solid fa-3",
+                "submenus": [
+                    {
+                        "name": "submenu Example 1",
+                        "id": "Trd.submenu.example1",
+                        "icon": "@fa:fa-solid fa-3",
+                        "action": "this.tst.s('Submenu Example 1 toast test')"
+                    }
+                ]
             }
         ]
     },
-    "trigger": {
-        ".example": "mainMenu"
+    "triggers": {
+        ".test1": "mainMenu",
+        ".test2": "secMenu",
+        ".test3": "trdMenu"
     }
 }
