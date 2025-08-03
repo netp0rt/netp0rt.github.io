@@ -26,14 +26,18 @@
     --rtc-font-family: "楷体", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     --rtc-font-size: 14px;
     --rtc-font-weight: normal;
-    --rtc-text-color: #444; /* 主文本颜色 */
+    --rtc-text-color: #000; /* 主文本颜色 */
+    --rtc-text-color-inv: #fff;
     
     /* --------------------------
      * 2. 颜色系统变量
      * -------------------------- */
-    --rtc-bg-color: rgba(255, 255, 255, 0.25); /* 菜单背景色 */
+    --rtc-bg-color: rgba(255, 255, 255, 0.5); /* 菜单背景色 */
     --rtc-hover-bg: rgba(245, 245, 245, 0.85); /* 悬停背景色 */
     --rtc-active-bg: rgba(230, 230, 230, 0.95); /* 点击背景色 */
+    --rtc-bg-color-inv: rgba(0, 0, 0, 0.25); /* 菜单背景色 */
+    --rtc-hover-bg-inv: rgba(15, 15, 15, 0.85); /* 悬停背景色 */
+    --rtc-active-bg-inv: rgba(25, 25, 25, 0.95); /* 点击背景色 */
     --rtc-disabled-color: #aaa; /* 禁用项颜色 */
     --rtc-divider-color: rgba(220, 220, 220, 0.8); /* 分隔线颜色 */
     --rtc-placeholder-color: transparent; /* 占位符颜色 */
@@ -51,7 +55,7 @@
     /* --------------------------
      * 4. 视觉效果变量
      * -------------------------- */
-    --rtc-box-shadow: 2px 4px 20px rgba(0, 0, 0, 0.25); /* 主阴影 */
+    --rtc-box-shadow: 2px 4px 20px rgba(0, 0, 0, 0.45); /* 主阴影 */
     --rtc-backdrop-filter: blur(4px); /* 背景模糊效果 */
     --rtc-transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1); /* 过渡动画 */
     --rtc-border-color: rgba(255, 255, 255, 0.1); /* 边框颜色 */
@@ -68,7 +72,7 @@
      * 6. 子菜单配置变量
      * -------------------------- */
     --rtc-submenu-offset: -6px; /* 子菜单垂直偏移 */
-    --rtc-submenu-shadow: 3px 6px 20px rgba(0, 0, 0, 0.15); /* 子菜单阴影 */
+    --rtc-submenu-shadow: 3px 6px 20px rgba(0, 0, 0, 0.45); /* 子菜单阴影 */
     
     /* --------------------------
      * 7. 层级系统变量（z-index）
@@ -96,15 +100,21 @@
 /* =============================================
  * 菜单容器样式
  * ============================================= */
+
+#rtc-menu {
+    z-index: var(--rtc-base-z-index);
+    backdrop-filter: var(--rtc-backdrop-filter);
+    -webkit-backdrop-filter: var(--rtc-backdrop-filter);
+}
+
 .rtc-menu-container {
     font-family: var(--rtc-font-family);
     font-size: var(--rtc-font-size);
     color: var(--rtc-text-color);
     box-shadow: var(--rtc-box-shadow);
     border-radius: var(--rtc-border-radius);
+    mix-blend-mode: difference;
     background-color: var(--rtc-bg-color);
-    backdrop-filter: var(--rtc-backdrop-filter);
-    -webkit-backdrop-filter: var(--rtc-backdrop-filter);
     padding: var(--rtc-padding-vertical) 0;
     min-width: var(--rtc-menu-min-width);
     max-width: var(--rtc-menu-max-width);
@@ -146,7 +156,8 @@
 }
 
 .rtc-menu-list li:hover {
-    background-color: var(--rtc-hover-bg);
+    background-color: var(--rtc-bg-color);
+    filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.1));
 }
 
 /* =============================================
@@ -237,6 +248,9 @@
  * 菜单文本样式
  * ============================================= */
 .rtc-menu-list li .menu-item-text {
+    position: relative;
+    display: block;
+    color: var(--rtc-text-color);
     font-weight: var(--rtc-font-weight);
     font-family: var(--rtc-font-family);
     transition: var(--rtc-transition);
@@ -246,7 +260,7 @@
  * 子菜单容器样式
  * ============================================= */
 .rtc-submenu-container {
-    position: absolute;
+    position: absolute !important;
     left: 100%;
     top: var(--rtc-submenu-offset);
     min-width: 160px;
@@ -254,13 +268,14 @@
     font-family: var(--rtc-font-family);
     font-size: var(--rtc-font-size);
     color: var(--rtc-text-color);
-    box-shadow: var(--rtc-submenu-shadow);
-    border-radius: var(--rtc-border-radius);
-    background-color: var(--rtc-bg-color);
-    backdrop-filter: var(--rtc-backdrop-filter);
+    box-shadow: var(--rtc-submenu-shadow) !important;
+    border-radius: var(--rtc-border-radius) !important;
+    background-color: var(--rtc-bg-color) !important;
+    backdrop-filter: var(--rtc-backdrop-filter) !important;
     -webkit-backdrop-filter: var(--rtc-backdrop-filter);
     padding: var(--rtc-padding-vertical) 0;
     border: 1px solid var(--rtc-border-color);
+    margin-left: 1rem;
 }
 
 /* =============================================
@@ -307,8 +322,6 @@
     
     .rtc-submenu-container {
         position: static;
-        box-shadow: none;
-        margin-left: 16px;
     }
 }
 
