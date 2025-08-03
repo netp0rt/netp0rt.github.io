@@ -872,7 +872,7 @@ function setup() {
     try{
         var compatResult = null;
         try {
-            compatResult = ft.test({ mode: 'j', impact: true, minver: 9, showUnsupported: true });
+            compatResult = window.ft.test({ mode: 'j', impact: true, minver: 9, showUnsupported: true });
             console.group('兼容性报告');
             console.log('浏览器:', ft.getBrowserInfo().browser);
             console.log('支持版本:', compatResult.maxVer, compatResult.isPass ? '✅' : '❌');
@@ -907,4 +907,5 @@ function setup() {
     } catch (e) {
         console.error(e);
     }
+
 }
