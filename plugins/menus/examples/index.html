@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Menu Plugin Example - 响应式导航菜单示例</title>
+        <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="prism.css">
+        <link rel="stylesheet" href="styles.css">
+        <script src="featuredetector.js"></script>
+    </head>
+    <body>
+        <header class="main-header">
+            <div class="container">
+                <div class="logo">
+                    <a href="#">MenuPlugin</a>
+                </div>
+                <nav class="main-nav">
+                    <ul class="nav-menu">
+                        <li class="active"><a href="#"><i class="fas fa-home"></i> 首页</a></li>
+                        <li><a href="#"><i class="fas fa-info-circle"></i> 关于</a></li>
+                        <li class="dropdown">
+                            <a href="#"><i class="fas fa-th"></i> 服务 <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">网页设计</a></li>
+                                <li><a href="#">移动开发</a></li>
+                                <li><a href="#">UI/UX设计</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#"><i class="fas fa-image"></i> 作品集</a></li>
+                        <li><a href="#"><i class="fas fa-envelope"></i> 联系我们</a></li>
+                    </ul>
+                </nav>
+                <div class="mobile-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <section class="hero-section">
+                <div class="container">
+                    <h1>右键菜单插件</h1>
+                    <p>一个轻量级、可定制的右键菜单解决方案</p>
+                    <div class="cta-buttons">
+                        <a href="https://github.com/netp0rt/netp0rt.github.io" class="btn primary">下载插件</a>
+                        <a href="../docs/index.html" class="btn secondary">查看文档</a>
+                    </div>
+                </div>
+            </section>
+
+            <section class="features-section">
+                <div class="container">
+                    <h2>主要特性</h2>
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <i class="fas fa-cogs"></i>
+                            <h3>易于定制</h3>
+                            <p>通过JSON或XML就可定制右键菜单</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- 在features-section后面添加以下代码 -->
+            <section class="examples-section">
+                <div class="container">
+                    <h2>示例展示</h2>
+                    <div class="examples-grid">
+                        <div class="example">
+                            <h3>示例一</h3>
+                            <p>Code Menus配置部分：</p>
+                            <pre>
+                                <code class="language-json codeexample">
+/* JSON with Commponents */
+"menus": {
+    // ...
+    "mainMenu": [
+        {
+            "name": "mainMenu Example 1",
+            "id": "main.example",
+            "icon": "@fa:fa-solid fa-1",
+            "action": "this.tst.s('MainMenu 1 toast test')"
+        },
+        {
+            "name": "mainMenu Example 1",
+            "id": "main.example",
+            "icon": "@fa:fa-solid fa-1",
+            "submenus": [
+                {
+                    "name": "submenu Example 1",
+                    "id": "main.submenu.example1",
+                    "icon": "@fa:fa-solid fa-1",
+                    "action": "this.tst.s('Submenu Example 1 toast test')"
+                }
+            ]
+        }
+    ]
+    // ...
+},
+"triggers": {
+    ".test1": "mainMenu"
+    // ...
+}
+                                </code>
+                            </pre>
+                            <p>右键下面div区块</p>
+                            <div class="example-preview test1"></div>
+                        </div>
+                        <div class="example">
+                            <h3>示例二</h3>
+                            <p>Code Menus配置部分：</p>
+                            <pre>
+                                <code class="language-json codeexample">
+/* JSON with Commponents */
+"menus": {
+    // ...
+    "secMenu": [
+        {
+            "name": "SecondMenu Example 1",
+            "id": "Sec.example",
+            "icon": "@fa:fa-solid fa-2",
+            "action": "this.test()"
+        },
+        {
+            "name": "SecMenu Example 1",
+            "id": "Sec.example",
+            "icon": "@fa:fa-solid fa-2",
+            "submenus": [
+                {
+                    "name": "submenu Example 1",
+                    "id": "Sec.submenu.example1",
+                    "icon": "@fa:fa-solid fa-2",
+                    "action": "this.tst.s('Submenu Example 1 toast test')"
+                }
+            ]
+        }
+    ]
+    // ...
+},
+"triggers": {
+    ".test2": "secMenu"
+    // ...
+}
+                                </code>
+                            </pre>
+                            <p>右键下面div区块</p>
+                            <div class="example-preview test2"></div>
+                        </div>
+                        <div class="example">
+                            <h3>示例三</h3>
+                            <p>Code Menus配置部分：</p>
+                            <pre>
+                                <code class="language-json codeexample">
+/* JSON with Commponents */
+"menus": {
+    // ...
+    "trdMenu": [
+        {
+            "name": "TrdMenu Example 1",
+            "id": "Trd.example",
+            "icon": "@fa:fa-solid fa-3",
+            "action": "this.tst.s('TrdMenu 1 toast test')"
+        },
+        {
+            "name": "TrdMenu Example 1",
+            "id": "Trd.example",
+            "icon": "@fa:fa-solid fa-3",
+            "submenus": [
+                {
+                    "name": "submenu Example 1",
+                    "id": "Trd.submenu.example1",
+                    "icon": "@fa:fa-solid fa-3",
+                    "action": "this.tst.s('Submenu Example 1 toast test')"
+                }
+            ]
+        }
+    ]
+    // ...
+},
+"triggers": {
+    ".test3": "trdMenu"
+    // ...
+}
+                                </code>
+                            </pre>
+                            <p>右键下面div区块</p>
+                            <div class="example-preview test3"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="main-footer">
+            <div class="container">
+                <p>&copy; 2025 By netport</p>
+                <div class="social-links">
+                    <a href="https://github.com/netp0rt"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                </div>
+            </div>
+        </footer>
+        <!-- 滚动导航菜单 -->
+        <div class="scroll-nav">
+            <ul class="scroll-nav-list">
+                <li class="scroll-nav-main-item">
+                    <span class="scroll-nav-main-label">aaa</span>
+                    <ul class="scroll-nav-submenu">
+                        <li class="scroll-nav-subitem">
+                            <a href="#" class="scroll-nav-link">aaa.a</a>
+                        </li>
+                        <li class="scroll-nav-subitem">
+                            <a href="#" class="scroll-nav-link">aaa.b</a>
+                        </li>
+                    </ul>
+                </li>
+                
+                <!-- 独立菜单项 bbb -->
+                <li class="scroll-nav-main-item">
+                    <a href="#" class="scroll-nav-link">bbb</a>
+                </li>
+                
+                <!-- 独立菜单项 ccc -->
+                <li class="scroll-nav-main-item">
+                    <a href="#" class="scroll-nav-link">ccc</a>
+                </li>
+                
+                <!-- 返回顶部 -->
+                <li class="scroll-nav-main-item">
+                    <a href="#" class="scroll-nav-link scroll-top-btn">smoothscrolltotop</a>
+                </li>
+            </ul>
+        </div>
+        <script src="prism.js"></script>
+        <script src="main.js"></script>
+        <script src="index.js"></script>
+    </body>
+</html>
