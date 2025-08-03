@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Plugin Doc</title>
+        <link rel="stylesheet" href="/fonts/stylesheet.css" />
+        <link rel="stylesheet" href="doc.css" />
+        <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+        <script src="prism.js"></script>
+        <link rel="stylesheet" href="prism.css">
+    </head>
+    <body>
+        <div class="container">
+            <!-- 侧边栏 -->
+            <aside class="sidebar" id="sidebar">
+                <div class="load"></div>
+            </aside>
+            
+            <!-- 内容区域 -->
+            <main class="content" id="content">
+                <div class="content-header">
+                    <h1>RTCMenu 文档</h1>
+                    <button class="toggle-sidebar" id="toggleSidebar">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+                <div class="content-header">
+                    <a href="#" class="prev-doc">
+                        <i class="fas fa-chevron-left"></i>
+                        <span>上一页: --</span>
+                    </a>
+                    <a href="#" class="next-doc">
+                        <span>下一页: --</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </a>
+                </div>
+                
+                <!-- 内容占位 -->
+                <div id="content-main">
+                    <div class="load"></div>
+                    Content loading... Please wait or add your content here.
+                </div>
+
+                <!-- 页脚 -->
+                <div class="content-footer">
+                    <a href="#" class="prev-doc">
+                        <i class="fas fa-chevron-left"></i>
+                        <span>上一页: --</span>
+                    </a>
+                    <p>最后更新时间：<span id="xmlUpdateTime">--</span></p>
+                    <a href="#" class="next-doc">
+                        <span>下一页: --</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </a>
+                </div>
+            </main>
+            
+            <!-- 遮罩层 -->
+            <div class="overlay" id="overlay"></div>
+        </div>
+        
+        <script src="bootstarp.js"></script>
+    </body>
+</html>

@@ -1,0 +1,41 @@
+<div class="sidebar-header">
+    <div class="sidebar-title">RTCMenu 教程</div>
+</div>
+<div class="sidebar-menu">
+    <div class="menu-item">
+        <div>
+            <i class="fa-solid fa-lightbulb"></i>
+            <span>快速上手</span>
+        </div>
+        <div class="submenu">
+            <div data-xml="introduction" data-page="1">
+                <i class="fas fa-message"></i>
+                <span>简介</span>
+            </div>
+            <div data-xml="fastuse" data-page="2">
+                <i class="fas fa-download"></i>
+                <span>快速使用</span>
+            </div>
+        </div>
+    </div>
+    <div class="menu-item">
+        <div>
+            <i class="fas fa-book"></i>
+            <span>配置代码详细解析</span>
+        </div>
+        <div class="submenu">
+            <div data-xml="mainjs" data-page="3">
+                <i class="fas fa-file-alt"></i>
+                <span>main.js部分</span>
+            </div>
+            <div data-xml="menucss" data-page="4">
+                <i class="fas fa-download"></i>
+                <span>menu.css部分</span>
+            </div>
+            <div data-xml="menujson" data-page="5">
+                <i class="fas fa-file-alt"></i>
+                <span>menu.json部分</span>
+            </div>
+        </div>
+    </div>
+</div>

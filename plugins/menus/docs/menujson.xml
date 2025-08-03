@@ -1,0 +1,179 @@
+<pre class="line-numbers"><code class="language-json5">{
+    "opts": {
+        "name": "RTCMenu",
+        "author": "netport",
+        "version": "r-1.0.0-FF",
+        "description": "RighT Click Menu Plugin",
+        "readme": "readme.md",
+
+        // 是否为默认图标设置（如果为 true，在错误时使用默认empty.svg图标）
+        "defaultSet": true,
+        
+        // 是否为开发模式（toast展示更多信息）
+        "isdev": false,
+        
+        // 根配置选项（后续可能会删除该配置项）
+        "rootOpt": "",
+        "ghlink": "https://github.com/netp0rt（暂未上传）"
+    },
+    // style文件选择
+    "styles": "menu.css",
+    "menus": {
+        
+        // 公共菜单（所有元素都会显示，目前只能作为默认菜单）
+        "#public":[
+            {
+                // 菜单项名
+                "name": "Public Example 1",
+                // 菜单项id(唯一id，命名可以不为“菜单名.名称”。但是目前没用)
+                "id": "public.example",
+                /**
+                 * 菜单项图标
+                 * 图标项定义：
+                 * 
+                 * ""：
+                 * "" -> 标记为空，但是不是空字符串，如果设置defaultSet为true，则使用empty.svg替换，否则为空
+                 *
+                 * 相对路径与绝对路径：
+                 * "example.png" -> 相对路径，基于当前目录（或者是脚本运行目录）
+                 * "./example.png" -> 与"example.png"相同
+                 * "../example.png" -> 相对路径，基于当前目录的上一级
+                 * "/example.png" -> 绝对路径，基于网站根目录
+                 *
+                 * "&"：
+                 * "&" -> 空白占位符
+                 * 
+                 * "@":
+                 * "@fa:fa-solid fa-1" -> FontAwesome图标，但是必须<link>导入（当前支持FontAwesome, Bootstrap Icons，未对Material Icons, themify做测试）
+                 *
+                 * "#"：
+                 * "#--icon-paste" -> :root 定义的图标路径（如提前定义好--icon-paste: url("example.png");）
+                 *
+                 * "^"：
+                 * "^https://example.com/icon.png" -> 使用网络图像文件作为图标
+                 *
+                 * "$"：
+                 * "$example.png" -> 使用网站根目录下的图标文件（以后会废弃统一使用/example.png）
+                 */
+                "icon": "&",
+                /**
+                 * 菜单项点击时执行的 JavaScript 代码
+                 * Tip: 
+                 *     1. 由于是class属性，因此需使用this.xx调用处于当前class内部的函数。
+                 *     2. 该函数调用时可以返回一个Object对象，该对象可以被logMessage读取处理（前提是isdev必须为true，可能会废弃或更新）。具体参见下方返回对象结构。
+                 *         {
+                 *            "runstat": Boolean, -> 运行状态
+                 *         }
+                 *     3. 该项可为空
+                 *
+                 * "this.example()" -> 调用当前class的example函数
+                 * "example()" -> 调用class外部（全局）的example函数
+                 * "console.log('Example')" -> 调用console.log输出
+                 * "" -> 不执行任何操作
+                 */
+                "action": "this.tst.s('Example 1 toast test')",
+                
+                // "exc"仅限"#public"项，会排除公共菜单项（功能未实现）
+                "exc": ["mainMenu"]
+            },
+            {
+                "name": "Info",
+                "id": "public.plugininfo",
+                "icon": "@fa:fa-solid fa-info",
+                "action": "this.pluginInfo()",
+                "exc": ["mainMenu"]
+            }
+        ],
+
+        // 自定义菜单
+
+        // 菜单ID名称
+        "mainMenu": [
+            {
+                "name": "mainMenu Example 1",
+                "id": "main.example",
+                "icon": "@fa:fa-solid fa-1",
+                "action": "this.tst.s('MainMenu 1 toast test')"
+            },
+            {
+                "name": "mainMenu Example 1",
+                "id": "main.example",
+                "icon": "@fa:fa-solid fa-1",
+                /**
+                 * Submenus 子菜单项
+                 *
+                 * submenus与menus写法基本相同
+                 *
+                 * 注：
+                 *     1. 子菜单不能作为菜单添加submenus
+                 *     2. 子菜单可以在菜单里含多个
+                 */
+                "submenus": [
+                    {
+                        "name": "submenu Example 1",
+                        "id": "main.submenu1.example1",
+                        "icon": "@fa:fa-solid fa-1",
+                        "action": "this.tst.s('Submenu Example 1 toast test')"
+                    }
+                ]
+            }
+        ],
+        "secMenu": [
+            {
+                "name": "SecondMenu Example 1",
+                "id": "Sec.example",
+                "icon": "@fa:fa-solid fa-2",
+                "action": "this.test()"
+            },
+            {
+                "name": "SecMenu Example 1",
+                "id": "Sec.example",
+                "icon": "@fa:fa-solid fa-2",
+                "submenus": [
+                    {
+                        "name": "submenu Example 1",
+                        "id": "Sec.submenu.example1",
+                        "icon": "@fa:fa-solid fa-2",
+                        "action": "this.tst.s('Submenu Example 1 toast test')"
+                    }
+                ]
+            }
+        ],
+        "trdMenu": [
+            {
+                "name": "TrdMenu Example 1",
+                "id": "Trd.example",
+                "icon": "@fa:fa-solid fa-3",
+                "action": "this.tst.s('TrdMenu 1 toast test')"
+            },
+            {
+                "name": "TrdMenu Example 1",
+                "id": "Trd.example",
+                "icon": "@fa:fa-solid fa-3",
+                "submenus": [
+                    {
+                        "name": "submenu Example 1",
+                        "id": "Trd.submenu.example1",
+                        "icon": "@fa:fa-solid fa-3",
+                        "action": "this.tst.s('Submenu Example 1 toast test')"
+                    }
+                ]
+            }
+        ]
+    },
+
+    // 触发项配置
+    "triggers": {
+        /**
+         * 在符合元素上右击时触发指定菜单，如果为空则默认触发#public菜单
+         *
+         * 触发项写法：
+         * "#id/.class": "menuID"
+         * 触发项判断次序：
+         * #id>.class>临近的.class
+         */
+        ".test1": "mainMenu",
+        ".test2": "secMenu",
+        ".test3": "trdMenu"
+    }
+}</code></pre>

@@ -1,1 +1,123 @@
+<div class="doc-article">
+    <h2>快速使用</h2>
+    <div class="doc-content">
+        <h3>-需要增添删减的部分</h3>
+        <div class="tip">
+            <i class="fas fa-lightbulb"></i>
+            提示：打上“需要手动配置”或“按情况手动配置”的注释表示提示需要修改或配置
+        </div>
+        <h4>main.js：</h4>
+        <pre class="line-numbers"><code class="language-javascript">// ...
+class RTCMenu {
+    constructor(tools, menus) {
 
+        // 基础配置（需要手动配置）
+        this.runpath = this.detectRuntimePath(); //插件文件夹路径（自动识别，以脚本路径为准，可修改）
+        this.runconf = 'menu.json'; //菜单配置文件（默认不要动，也可以设置为.xml）
+
+        // ...
+
+        // 可执行脚本（目前没用[Not Used]）
+        this.runScripts = Object.freeze({
+            tools: this.tools,
+            tst: this.tst,
+            // 在这里绑定函数，例如 copy: this.copy.bind(this)
+            pluginInfo: this.pluginInfo.bind(this),
+            debug: () => `可用方法:,${Object.keys(this.runScripts)}`
+        });
+    }
+
+    // ...
+
+    /* ---------- 菜单动作 ---------- */
+    // 直接在这里写函数（需要手动配置）
+    test() {
+        this.tst.i('test');
+    }
+    async pluginInfo() {
+        // ...
+    }
+}</code></pre>
+        <h4>memu.json：</h4>
+        <pre class="line-numbers"><code class="language-json">{
+    "opts": {
+        "name": "RTCMenu",
+        "author": "netport",
+        "version": "r-1.0.0-FF",
+        "description": "RighT Click Menu Plugin",
+        "readme": "readme.md",
+
+        // 是否为默认图标设置（如果为 true，在错误时使用默认empty.svg图标，按情况手动配置）
+        "defaultSet": true,
+        
+        // 是否为开发模式（toast展示更多信息，按情况手动配置）
+        "isdev": false,
+        
+        // 根配置选项（后续可能会删除该配置项）
+        "rootOpt": "",
+        "ghlink": "https://github.com/netp0rt（暂未上传）"
+    },
+    // style文件选择
+    "styles": "menu.css",
+    "menus": {
+        
+        // 公共菜单（所有元素都会显示，目前只能作为默认菜单，按情况手动修改）
+        "#public":[
+            {
+                // 菜单项名
+                "name": "Public Example 1",
+                // 菜单项id（唯一id，命名可以不是“菜单名.名称”。但是目前没用[Not Used]）
+                "id": "public.example",
+                // 菜单项图标（可为空，详情见左侧栏配置代码详细解析>menu.json）
+                "icon": "&",
+                // 菜单项点击事件（可为空，详情见同上）
+                "action": "this.tst.s('Example 1 toast test')",
+                // 菜单项排除项（仅限#public，详情见同上）
+                "exc": ["mainMenu"]
+            },
+            {
+                "name": "Info",
+                "id": "public.plugininfo",
+                "icon": "@fa:fa-solid fa-info",
+                "action": "this.pluginInfo()",
+                "exc": ["mainMenu"]
+
+            }
+        ],
+
+        // 自定义菜单
+        // 菜单名
+        "mainMenu": [
+            {
+                "name": "mainMenu Example 1",
+                "id": "main.example",
+                "icon": "@fa:fa-solid fa-1",
+                "action": "this.tst.s('MainMenu 1 toast test')"
+            },
+            {
+                "name": "mainMenu Example 1",
+                "id": "main.example",
+                "icon": "@fa:fa-solid fa-1",
+                // 子菜单项配置（详情见左侧栏配置代码详细解析>menu.json）
+                "submenus": [
+                    {
+                        "name": "submenu Example 1",
+                        "id": "main.submenu.example1",
+                        "icon": "@fa:fa-solid fa-1",
+                        "action": "this.tst.s('Submenu Example 1 toast test')"
+                    }
+                ]
+            }
+        ],
+        // 其他菜单配置...
+    },
+    // 触发器配置
+    "triggers": {
+        // 触发器配置项（详情见左侧栏配置代码详细解析>menu.json）
+        ".test1": "mainMenu",
+        ".test2": "secMenu",
+        ".test3": "trdMenu"
+    }
+}</code></pre>
+    </div>
+</div>
